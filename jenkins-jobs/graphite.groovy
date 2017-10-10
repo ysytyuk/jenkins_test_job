@@ -24,3 +24,21 @@ pipelineJob("$directory/Remove old metrics(template)") {
         }
     }
 }
+
+pipelineJob("$directory/Migration(template)") {
+    description '''
+    Template pipeline for migration from a graphite node
+    Managed by DSL (jenkins-setup repo)
+    '''
+    definition {
+        logRotator {
+            numToKeep(5)
+            artifactNumToKeep(1)
+            daysToKeep(7)
+        }
+        cps {
+            sandbox()
+            script(readFileFromWorkspace('jenkins-jobs/pipelines/graphite_stack/vip_migration.groovy'))
+        }
+    }
+}
