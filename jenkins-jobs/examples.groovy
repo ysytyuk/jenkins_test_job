@@ -31,3 +31,17 @@ pipelineJob("$directory/use_credentials") {
         }
     }
 }
+
+pipelineJob("$directory/input_timeout") {
+    definition {
+        logRotator {
+            numToKeep(5)
+            artifactNumToKeep(1)
+            daysToKeep(7)
+        }
+        cps {
+            sandbox()
+            script(readFileFromWorkspace('jenkins-jobs/pipelines/examples/input_timeout.groovy'))
+        }
+    }
+}
