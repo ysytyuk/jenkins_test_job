@@ -17,6 +17,7 @@ pipelineJob("$directory/Remove old metrics(template)") {
         }
         parameters {
             stringParam('Enter_Password', '', 'Please, enter something :)')
+            hudson.model.ItemGroup.getItems()
         }
         cps {
             sandbox()
@@ -35,6 +36,9 @@ pipelineJob("$directory/Migration(template)") {
             numToKeep(5)
             artifactNumToKeep(1)
             daysToKeep(7)
+        }
+         parameters {
+            hudson.model.ItemGroup.getItems()
         }
         cps {
             sandbox()
